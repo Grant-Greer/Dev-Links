@@ -13,16 +13,10 @@ builder.prismaObject("Link", {
   }),
 });
 
-// graphql/types/Link.ts
-// code above unchanged
-
-// 1.
 builder.queryField("links", (t) =>
-  // 2.
-  t.prismaField({
-    // 3.
-    type: ["Link"],
-    // 4.
+  t.prismaConnection({
+    type: "Link",
+    cursor: "id",
     resolve: (query, _parent, _args, _ctx, _info) =>
       prisma.link.findMany({ ...query }),
   })
